@@ -1,0 +1,29 @@
+version: '3'
+networks:
+  web:
+    driver: bridge
+services:
+  db:
+    image: mysql:5.7
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_DATABASE='enstitium'
+      - MYSQL_USER='Bikalpa'
+      - MYSQL_PASSWORD='Bikalpa123'
+      - MYSQL_ROOT_PASSWORD='root_password'
+    networks:
+      - web
+    volumes:
+      - ./db:/var/lib/mysql
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    networks:
+      - web
