@@ -19,6 +19,8 @@ class CustomUserForm(FormSettings):
     last_name = forms.CharField(required=True)
     address = forms.CharField(widget=forms.Textarea)
     password = forms.CharField(widget=forms.PasswordInput)
+    confirm_password = forms.CharField(widget=forms.PasswordInput)
+
     widget = {
         'password': forms.PasswordInput(),
     }
@@ -52,7 +54,7 @@ class CustomUserForm(FormSettings):
 
     class Meta:
         model = CustomUser
-        fields = ['first_name', 'last_name', 'email', 'gender',  'password','profile_pic', 'address' ]
+        fields = ['first_name', 'last_name', 'email', 'gender',  'password', 'confirm_password', 'profile_pic', 'address' ]
 
 
 class StudentForm(CustomUserForm):

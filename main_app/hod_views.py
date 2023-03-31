@@ -609,10 +609,14 @@ def admin_view_profile(request):
                 first_name = form.cleaned_data.get('first_name')
                 last_name = form.cleaned_data.get('last_name')
                 password = form.cleaned_data.get('password') or None
+                confirmPassword = form.cleaned_data.get('confirm_password') or None
                 passport = request.FILES.get('profile_pic') or None
                 custom_user = admin.admin
                 if password != None:
                     custom_user.set_password(password)
+                if(password != confirmPassword):
+                    messages.error(request, "Password not matched")
+                    return redirect(reverse('admin_view_profile'))
                 if passport != None:
                     fs = FileSystemStorage()
                     filename = fs.save(passport.name, passport)
