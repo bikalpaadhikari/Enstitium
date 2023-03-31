@@ -2,9 +2,6 @@ version: '3'
 services:
   db:
     image: mysql:8
-    environment:
-      - MYSQL_DATABASE=enstitium
-      - MYSQL_ROOT_PASSWORD=Bikalpa123
     volumes:
       - db_data:/var/lib/mysql
       - migrate_data:/app/db  
