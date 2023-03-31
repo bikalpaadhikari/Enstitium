@@ -27,8 +27,13 @@ SECRET_KEY = 'f2zx8*lb*em*-*b+!&1lpp&$_9q9kmkar+l3x90do@s(+sr&x7'  # Consider us
 DEBUG = True
 
 # ALLOWED_HOSTS = ['smswithdjango.herokuapp.com']
+#Allowed Host for the local host
 # ALLOWED_HOSTS = ['127.0.0.1']  # Not recommended but useful in dev mode
-ALLOWED_HOSTS = ['0.0.0.0']
+
+#Allowed host for the docker 
+ALLOWED_HOSTS = ['localhost', '0.0.0.0']
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -97,13 +102,15 @@ DATABASES = {
     #     'HOST': '127.0.0.1',
     #     'PORT': '3306',
     # }
+
+
+    #Database for the container 
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'enstitium',
         'USER': 'root',
         'PASSWORD': 'Bikalpa123',
         'HOST': os.environ.get('MYSQL_DATABASE_HOST', 'db'),
-        # 'HOST': '172.24.0.2',
         'PORT': '3306',
     }
 }
