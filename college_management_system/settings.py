@@ -31,7 +31,7 @@ DEBUG = True
 # ALLOWED_HOSTS = ['127.0.0.1']  # Not recommended but useful in dev mode
 
 #Allowed host for the docker 
-ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '0.0.0.0', ]
 
 
 # Application definition
@@ -94,25 +94,25 @@ DATABASES = {
     #     'NAME': BASE_DIR / 'db.sqlite3',
     # }
     
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'enstitium',
-        'USER': 'Bikalpa',
-        'PASSWORD': 'Bikalpa123',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
-    }
-
-
-    #Database for the container 
     # 'default': {
     #     'ENGINE': 'django.db.backends.mysql',
     #     'NAME': 'enstitium',
-    #     'USER': 'root',
+    #     'USER': 'Bikalpa',
     #     'PASSWORD': 'Bikalpa123',
-    #     'HOST': os.environ.get('MYSQL_DATABASE_HOST', 'db'),
+    #     'HOST': '127.0.0.1',
     #     'PORT': '3306',
     # }
+
+
+    #Database for the container 
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'enstitium',
+        'USER': 'root',
+        'PASSWORD': 'Bikalpa123',
+        'HOST': os.environ.get('MYSQL_DATABASE_HOST', 'db'),
+        'PORT': '3306',
+    }
 }
 
 # Password validation
