@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enstitium-db
+  namespace: enstitium
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: enstitium-db
+  template:
+    metadata:
+      labels:
+        app: enstitium-db
+    spec:
+      containers:
+      - name: db
+        image: mysql:8
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: db-data
+          mountPath: /var/lib/mysql
+        - name: migrate-data
+          mountPath: /app/db
+      volumes:
+      - name: db-data
+        hostPath:
+          # directory location on host
+          path: /home/bikalpa/Documents/EnstitiumData
+          
+      - name: migrate-data
+        hostPath:
+          # directory location on host
+          path: /home/bikalpa/Documents/EnstitiumData
+          

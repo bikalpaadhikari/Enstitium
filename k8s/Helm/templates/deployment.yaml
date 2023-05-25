@@ -1,0 +1,42 @@
+# templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enstitium
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: enstitium
+  template:
+    metadata:
+      labels:
+        app: enstitium
+    spec:
+      containers:
+      - name: web
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: 8000
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+      - name: db
+        image: "{{ .Values.mysql.image }}"
+        volumeMounts:
+        - name: db-data
+          mountPath: /var/lib/mysql
+        - name: migrate-data
+          mountPath: /app/db
+      volumes:
+      - name: db-data
+        persistentVolumeClaim:
+          claimName: db-data-pvc
+      - name: migrate-data
+        persistentVolumeClaim:
+          claimName: migrate-data-pvc

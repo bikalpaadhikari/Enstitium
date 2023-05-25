@@ -1,0 +1,5 @@
+# Chart.yaml
+apiVersion: v2
+name: enstitium
+description: A Helm chart for the Enstitium Django application
+version: 1.0.0

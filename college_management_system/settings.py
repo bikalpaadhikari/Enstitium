@@ -31,7 +31,7 @@ DEBUG = True
 # ALLOWED_HOSTS = ['127.0.0.1']  # Not recommended but useful in dev mode
 
 #Allowed host for the docker 
-ALLOWED_HOSTS = ['localhost', '0.0.0.0', ]
+ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1' ]
 
 
 # Application definition

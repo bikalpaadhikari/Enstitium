@@ -1,0 +1,16 @@
+# service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: enstitium
+spec:
+  type: NodePort
+  selector:
+    app: enstitium
+  ports:
+  - port: 8000
+    targetPort: 8000
+    nodePort: 31000
+
+
+

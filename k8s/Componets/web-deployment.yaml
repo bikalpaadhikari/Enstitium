@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: enstitium-web
+  namespace: enstitium
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: enstitium-web
+  template:
+    metadata:
+      labels:
+        app: enstitium-web
+    spec:
+      containers:
+      - name: web
+        image: bikalpaadhikari/enstitium:v2
+        ports:
+        - containerPort: 8000
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+        env:
+        - name: DB_HOST
+          value: enstitium-db-svc
+        - name: DB_PORT
+          value: "3306"
+        - name: MYSQL_DATABASE
+          value: enstitium
+        - name: MYSQL_ROOT_PASSWORD
+          value: Bikalpa123
+
+
+
+
+
+
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: enstitium
+# spec:
+#   replicas: 2
+#   selector:
+#     matchLabels:
+#       app: enstitium
+#   template:
+#     metadata:
+#       labels:
+#         app: enstitium
+#     spec:
+#       containers:
+#       - name: web
+#         image: bikalpaadhikari/enstitium:v1
+#         ports:
+#         - containerPort: 8000
+#         readinessProbe:
+#           httpGet:
+#             path: /health
+#             port: 8000
+#         livenessProbe:
+#           httpGet:
+#             path: /health
+#             port: 8000
+#       - name: db
+#         image: mysql:8
+#         volumeMounts:
+#         - name: db-data
+#           mountPath: /var/lib/mysql
+#         - name: migrate-data
+#           mountPath: /app/db
+#       volumes:
+#       - name: db-data
+#         persistentVolumeClaim:
+#           claimName: db-data-pvc
+#       - name: migrate-data
+#         persistentVolumeClaim:
+#           claimName: migrate-data-pvc
